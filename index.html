@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sammy ❤️</title>
+    <style>
+        /* --- CSS STYLING --- */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background 1s ease;
+        }
+
+        /* The Glass Box */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 90%;
+            width: 400px;
+            z-index: 10; 
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #ff4d6d;
+            font-size: 2.5rem;
+            margin-top: 0;
+        }
+
+        #reason-display {
+            min-height: 80px;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 300;
+        }
+
+        button {
+            background: #ff4d6d;
+            border: none;
+            padding: 12px 30px;
+            color: white;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff0a3d;
+            transform: scale(1.05);
+        }
+
+        /* Heart Animation */
+        .heart {
+            position: fixed;
+            top: -10px;
+            color: #ff4d6d;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Why I Love You</h1>
+        <div id="reason-display">Click the button...</div>
+        <button onclick="showNewReason()">Tell Me Why ❤️</button>
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+
+        // 1. EDIT YOUR REASONS HERE
+        const reasons = [
+            "The way you smile when you see me.",
+            "How you always support my dreams.",
+            "Your laugh is my favorite sound.",
+            "Because you make the bad days better.",
+            "The way your eyes light up when you talk about things you love.",
+            "Because you are my best friend.",
+            "How kind you are to everyone you meet.",
+            "Because knowing you is the best thing that ever happened to me.",
+            "Your terrible jokes (that are actually cute).",
+            "Just because you are you."
+        ];
+
+        const display = document.getElementById('reason-display');
+        
+        function showNewReason() {
+            const randomIndex = Math.floor(Math.random() * reasons.length);
+            display.innerText = reasons[randomIndex];
+        }
+
+        // 2. RAINING HEARTS LOGIC
+        let rainInterval = 300; 
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️'; 
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px"; 
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s"; 
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        let heartRain = setInterval(createHeart, rainInterval);
+
+
+        // 3. THE CHEAT CODE LOGIC (UPDATED)
+        // The secret code is "sammy" (case insensitive)
+        const secretCode = 'sammy'; 
+        let inputBuffer = '';
+
+        window.addEventListener('keyup', (e) => {
+            // Convert every key press to lowercase to ensure "Sammy" or "SAMMY" works
+            inputBuffer += e.key.toLowerCase();
+            
+            // Check the last 5 characters typed
+            if(inputBuffer.slice(-secretCode.length) === secretCode) {
+                activateSuperLoveMode();
+            }
+        });
+
+        function activateSuperLoveMode() {
+            // 1. Change background to a deep romantic red
+            document.body.style.background = "linear-gradient(135deg, #590d22, #800f2f)";
+            
+            // 2. Update Title personalized for her
+            document.querySelector('h1').innerText = "I LOVE YOU SAMMY! ❤️";
+            
+            // 3. Make it rain HEAVILY
+            clearInterval(heartRain); 
+            setInterval(createHeart, 50); // Fast rain
+            
+            // 4. Add extra emojis
+            const extras = ['🌹', '😍', '💍', '🥰', '👑'];
+            setInterval(() => {
+                const extra = document.createElement('div');
+                extra.classList.add('heart');
+                extra.innerHTML = extras[Math.floor(Math.random() * extras.length)];
+                extra.style.left = Math.random() * 100 + "vw";
+                extra.style.animationDuration = "2s";
+                document.body.appendChild(extra);
+                setTimeout(() => extra.remove(), 2000);
+            }, 100);
+
+            alert("✨ MAGIC UNLOCKED: You found the secret code! ✨");
+        }
+
+    </script>
+</body>
+</html>
